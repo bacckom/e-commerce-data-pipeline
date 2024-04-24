@@ -1,0 +1,34 @@
+country_name: "CH"
+
+source_tables:
+  products:
+    table_name: "products"
+    path: "data_files/olist_products_dataset.csv"
+    type: "local"
+  customers:
+    table_name: "customers"
+    path: "data_files/olist_customers_dataset.csv"
+    type: "local"
+  order_items:
+    table_name: "order_items"
+    path: "data_files/olist_order_items_dataset.csv"
+    type: "local"
+  order_payments:
+    table_name: "order_payments"
+    path: "data_files/olist_order_payments_dataset.csv"
+    type: "local"
+  orders:
+    table_name: "orders"
+    path: "data_files/olist_orders_dataset.csv"
+    type: "local"
+  order_reviews:
+    table_name: "order_reviews"
+    path: "data_files/olist_order_reviews_dataset.csv"
+    type: "local"
+
+
+target_tables:
+   customer_product_orders:
+     table_name: "customer_product_orders"
+     path: "data_files/output"
+     partition: "product_id"

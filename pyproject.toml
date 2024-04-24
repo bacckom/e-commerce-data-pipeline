@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=63.4.1", "pip >= 23.1", "setuptools-scm>=6.4.2,<7", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ecommerce"
+authors = [
+    {name = "Cavan, Wu", email = "bacckom@sina.com"}
+]
+description = "Data pipelines for generating sales forcast data."
+requires-python = "==3.11"
+keywords = ["ecommerce"]
+license = {text = "Proprietary"}
+classifiers = [
+    "Programming Language :: Python :: 3.11"
+]
+dynamic = ["version", "dependencies", "optional-dependencies"]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[project.urls]
+homepage = "https://github.com/bacckom/e-commerce-data-pipeline"
+
+[tool.setuptools]
+include-package-data = true
+package-dir = {"" = "src"}
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+# automatically find packages
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = true

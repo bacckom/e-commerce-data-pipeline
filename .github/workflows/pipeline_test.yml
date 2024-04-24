@@ -1,0 +1,28 @@
+name: Data Pipeline Deployment Unit Test
+on:
+  # Triggers the workflow on pull request events but only for the "main" branch
+  pull_request:
+    branches: [ "main" ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4.6.0
+      with:
+        python-version: 3.11
+
+    - name: Pip install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install --upgrade setuptools setuptools-scm[toml]
+
+    - name: Pytest Unit test run
+      id: run-pytest-cov
+      run: |
+        python -m pytest -v -ss --cov --cov-branch -rs .
