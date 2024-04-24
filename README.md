@@ -1,5 +1,5 @@
 # e-commerce-data-pipeline
-Transformed data for data science to do sales forecasting on Brazilian E-Commerce Public Dataset. 
+Transformed data for Data Scientists to do sales forecasting based on Brazilian E-Commerce Public Dataset. 
 
 - Used yaml config file to config raw data type and path.
 - Used Pandas + Spark to clean and transform data, data pipeline will read raw data, clean data and process data, then use Spark to write it as parquet file partitioned by product_id as a single table.
