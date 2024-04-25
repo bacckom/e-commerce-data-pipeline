@@ -8,11 +8,11 @@ authors = [
     {name = "Cavan, Wu", email = "bacckom@sina.com"}
 ]
 description = "Data pipelines for generating sales forcast data."
-requires-python = "==3.11"
+requires-python = "==3.11.1"
 keywords = ["ecommerce"]
 license = {text = "Proprietary"}
 classifiers = [
-    "Programming Language :: Python :: 3.11"
+    "Programming Language :: Python :: 3.11.1"
 ]
 dynamic = ["version", "dependencies", "optional-dependencies"]
 
