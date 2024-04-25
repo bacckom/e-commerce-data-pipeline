@@ -29,6 +29,11 @@ Transformed data for Data Scientists to do sales forecasting based on Brazilian 
    
 
 # Sales forcast result
-![img_1.png](imgs/img_1.png)
+![img1.png](imgs/img1.png)
 
 
+# CI/CD git action PR demo
+![img3.png](imgs/img3.png) 
+
+
+# Thank you!
