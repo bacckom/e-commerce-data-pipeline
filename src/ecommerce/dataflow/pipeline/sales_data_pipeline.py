@@ -17,10 +17,9 @@ from ecommerce.engine.spark_engine import create_spark_session
 from pyspark.sql import SparkSession
 
 
-
 class SalesDataPipeline(BasePipeline):
-    def __init__(self, platform: Optional[Environment] = None):
-        self.configs = platform.configs if platform else Environment().configs
+    def __init__(self, environment: Optional[Environment] = None):
+        self.configs = environment.configs if environment else Environment().configs
 
     def run(self) -> CustomerProductOrderObject:
         configs = self.configs
@@ -36,7 +35,6 @@ class SalesDataPipeline(BasePipeline):
 
         """ Transform data..."""
         customer_product_order = self._merge_customer_product_orders(product, customer, order, order_items, order_payments, order_reviews)
-        # customer_product_order['sales'] = customer_product_order['payment_value']
         cleaned_data = self._clean_data(customer_product_order)
         final_data = self._dimension_reduction(cleaned_data)
 
@@ -47,10 +45,13 @@ class SalesDataPipeline(BasePipeline):
 
     def _clean_data(self, customer_product_order: pd.DataFrame) -> pd.DataFrame:
         spark = create_spark_session()
-        """ use head 2000 for testing purpose"""
-        s_df = spark.createDataFrame(customer_product_order.head(2000))
-        s_df.drop_duplicates(subset=["order_purchase_timestamp", "product_id", "seller_id", "customer_city", "payment_value", "review_score"])
-        s_df.dropna(subset=["order_purchase_timestamp", "product_id", "seller_id", "customer_city", "payment_value", "review_score"])
+        """ use head 50000 for testing purpose"""
+        s_df = spark.createDataFrame(customer_product_order.head(20000))
+        s_df.dropna(subset=["order_purchase_timestamp", "product_id", "seller_id", "customer_city", "payment_value",
+                            "review_score"])
+        s_df.drop_duplicates(
+            subset=["order_purchase_timestamp", "product_id", "seller_id", "customer_city", "payment_value",
+                    "review_score"])
         return s_df.toPandas()
 
 
