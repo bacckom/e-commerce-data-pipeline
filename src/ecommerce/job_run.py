@@ -1,3 +1,4 @@
+import pandas as pd
 from ecommerce.env.environment import Environment
 from ecommerce.ml.sales_forecast import SalesForecaster
 from ecommerce.dataflow.pipeline.sales_data_pipeline import SalesDataPipeline
@@ -19,4 +20,5 @@ if __name__ == "__main__":
     forecaster = SalesForecaster(env.configs, product_sales_df)
     predictions = forecaster.forecast()
 
-    print(f'Sales prediction 7 days: {predictions}.')
+    print(f'Sales prediction 7 days: {pd.DataFrame(predictions).to_string(index=True)}')
+

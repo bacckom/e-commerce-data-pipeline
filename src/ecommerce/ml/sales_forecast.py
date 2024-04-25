@@ -18,7 +18,7 @@ class SalesForecaster:
         encoder = LabelEncoder()
         data['product_id'] = encoder.fit_transform(data['product_id'])
 
-        input_columns = ['order_purchase_timestamp', 'product_id']
+        input_columns = ['order_purchase_timestamp', 'product_id', 'seller_id', 'customer_city', 'review_score']
         target_column = 'payment_value'
 
         X = data[input_columns]
@@ -33,10 +33,19 @@ class SalesForecaster:
         next_7_days = [x.toordinal() for x in next_7_days]
 
         product_id = data['product_id'].iloc[0]
+        seller_id = data['seller_id'].iloc[0]
+        city = data['customer_city'].iloc[0]
+        review_score = 0
 
-        predictions = model.predict(pd.DataFrame({
-            'order_purchase_timestamp': next_7_days,
-            'product_id': [product_id for _ in range(7)]
-        }))
+        predictions = []
+        for i in range(7):
+            prediction = model.predict(pd.DataFrame({
+                'order_purchase_timestamp': [next_7_days[i]],
+                'product_id': [product_id],
+                'seller_id': [seller_id],
+                'customer_city': [city],
+                'review_score': [review_score+i]
+            }))
+            predictions.append(prediction[0])
 
         return predictions
